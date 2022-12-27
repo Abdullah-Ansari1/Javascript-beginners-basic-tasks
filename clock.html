@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>clock project</title>
+</head>
+<body>
+	
+	<div id="clock" style="font-size: 35px; color: #00aaff; text-shadow: 2px 2px 2px blue; border: 3px groove blue; background-color: #aaffaa; width: 195px; height: 40px;"></div>
+
+	<script type="text/javascript">
+
+		function startTime() {
+			var today= new Date();
+			var h= today.getHours();
+			var m = today.getMinutes();
+			var s = today.getSeconds();
+			var ap = "AM";
+			//Add AM or PM after time
+
+		if (h>11) 
+		{
+			ap="PM";
+		}
+		else if (h>12) 
+		{
+			h= h - 12;
+		}
+		else if (h==0) 
+		{
+			h = 12;
+		}
+
+		//Add zero when number less than 10
+		m = checktime(m);
+		s = checktime(s);
+
+		document.getElementById('clock').innerHTML= h + ":" + m + ":" + ":" + s + ":" + "" + ap;
+		var t = setTimeout('startTime()');
+
+
+		}
+function checktime(i) {
+	if (i<10) 
+	{
+		i= "0"+i;
+	}
+	return i;
+}
+window.onload = startTime;
+	</script>
+
+</body>
+</html>

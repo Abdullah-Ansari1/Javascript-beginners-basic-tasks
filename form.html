@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Form</title>
+	<style type="text/css">
+		
+h1{
+	text-align: center;
+}
+#firstp{
+	text-align: center;
+	font-size: 20px;
+}
+
+.inputs{
+	width: 50%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	border: none;
+	margin-left: 400px;
+	background-color: lightseagreen;
+}
+#male{
+	margin-left: 650px;
+
+}
+#subbtn{
+	margin-left: 650px;
+	margin-top: 15px;
+	width: 200px;
+	height: 50px;
+	background-color: lightblue;
+	font-size: 14px;
+	border: 0;
+
+}
+
+	</style>
+</head>
+<body>
+	
+	<form name="myform" onsubmit="return(validate());">
+		<h1>Registration Form</h1>
+
+		<p id="firstp"> Please fill form below </p>
+		<p><input type="text" name="username" id="username" placeholder="Username" class="inputs"></p>
+		<p><input type="text" name="email" id="email" placeholder="Email" class="inputs"></p>
+		<p><input type="password" name="psw" id="psw" placeholder="Password" class="inputs"></p>
+		<p><input type="password" name="repsw" id="repsw" placeholder=" Re-type Password" class="inputs"></p>
+
+		<input type="radio" name="gender" id="male" value="male">Male
+		<input type="radio" name="gender" id="female" value="female">FeMale
+
+		<p><input type="submit" value="Register" id="subbtn"></p>
+	</form>
+
+	<script type="text/javascript">
+
+
+function reportErrors(errors) 
+{
+	var msg = "please Enter Valid Data...\n";
+	for (var i = 0; i<errors.length; i++)
+	{
+		var numErrors = i + 1;
+		msg +="\n" + numErrors + errors[i]
+	}
+alert(msg);
+}
+
+function validate() {
+	var errors= [];
+	var user = document.getElementById('username').value;
+	var email = document.getElementById('email').value;
+	var pass = document.getElementById('psw').value;
+	var repass = document.getElementById('repsw').value;
+	var male = document.getElementById('male').checked;
+	var female = document.getElementById('female').checked;
+	var passlength = (pass.length)+1;
+	var ck_name = /^[A-Za-z]/;
+	var ck_mail = /^[a-z0-9._]+@+[a-z]+\.[a-z]/;
+	var userlength = (user.length) + 1 ;
+
+	//validate username
+
+	if (user=="")
+	 {
+	 	errors[errors.length] = "You must enter a valid username";
+	 }
+
+	 else if (!ck_name.test(user))
+	  {
+	  	errors[errors.length] = "Username Should Contain A-Z OR a-z characters";
+	  }
+
+	  else if (userlength<5||userlength>16)
+	   {
+	   	errors[errors.length] = "The username should contain 5-15 charactors";
+	   }
+
+	   //validate email
+
+	   if (email=="")
+ {
+errors[errors.length] = "You must enter a valid  email";
+
+	   }
+
+else if (!ck_mail.test(email)) 
+{
+	errors[errors.length]="Type correct E-mail Address";
+}
+
+//validate password
+
+if (pass=="")
+ {
+errors[errors.length]= "password should not be empty";
+
+ }
+ else if (passlength<9)
+  {
+  	errors[errors.length]= "Your password should be at least 8 characters";
+  }
+
+  else if (pass!=repass) 
+  {
+  	errors[errors.length]= "password not match";
+  }
+
+  //validate radio buttons
+
+  if ((male=="")&&(female==""))
+   {
+   	errors[errors.length]= "please select your gender";
+   }
+
+	 if (errors.length>0) 
+	 {
+	 	reportErrors(errors);
+	 	return false;
+	 }
+	 return true;
+}
+	
+	</script>
+
+</body>
+</html>
